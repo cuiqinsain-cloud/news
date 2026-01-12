@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Build artifacts / temp
+tmp_*.pyc
+
+# Generated HTML outputs
+Data/
+
+# Optional: editor settings
+.idea/
+.vscode/
