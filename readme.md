@@ -1,4 +1,4 @@
-# News Assistant Overview
+# News Assistant README
 
 This document summarizes the available news sources, features, and how to interact with me to fetch and compose news pages.
 
@@ -22,9 +22,9 @@ This document summarizes the available news sources, features, and how to intera
 
 ## How To Interact
 - Tell me a date or date range (`YYYY-MM-DD`), and optionally a list of stock codes.
-- I will build and open an HTML page with the requested sections.
-- If you don’t specify stock codes, I won’t include any per‑stock sections.
-- You can also ask for raw JSON for specific stocks.
+- I will always build and open a combined HTML page with the requested sections.
+- If you don’t specify stock codes, the page will include only the default sections（国内经济、国际经济、行业研报）.
+- 即使以“给我数据/JSON”等方式描述需求，最终我也会生成并打开 HTML 页面；如需 JSON，仅用于内部抓取调试，不再作为默认输出。
 
 ## Common Commands
 Note: output HTML filenames now auto-append a timestamp suffix like `_YYYYMMDD_HHMMSS`. Pass `--no-ts` to keep the exact filename.
@@ -54,8 +54,8 @@ Note: output HTML filenames now auto-append a timestamp suffix like `_YYYYMMDD_H
   - HK: prefixed with `HK` (e.g., `HK2097`)
 
 ## Outputs You Get
-- Combined HTML page with tabs (always Domestic/International/Industry; optional stock tabs)
-- Per‑stock JSON with lists of Hot News and Related Reports (A-share only for reports)
+- Combined HTML page with tabs（默认包含：国内经济、国际经济、行业研报；可选：个股标签）
+- 不再单独返回 JSON 作为最终结果；个股 JSON 抓取仅用于内部流程以生成页面。
 
 ## Notes & Caveats
 - Anti-scraping: HK JSON may require a `hexin-v` header. If needed, set an environment variable before running:
@@ -66,11 +66,11 @@ Note: output HTML filenames now auto-append a timestamp suffix like `_YYYYMMDD_H
 
 ## Examples of Asking
 - “我要看今天的新闻”
-  - I’ll build the combined page for today (no stocks) and open it.
+  - 我会构建当天的综合 HTML 页面（默认三大板块），并打开。
 - “我要看昨天的新闻，并加入 688111 和 HK2097”
-  - I’ll build the combined page for yesterday with those stock tabs and open it.
+  - 我会构建昨天的综合 HTML 页面，包含所列个股标签，并打开。
 - “给我 688111 的热点新闻和相关研报，时间 2025-12-01 到 2026-01-12”
-  - I’ll return JSON or embed into HTML upon request.
+  - 我会抓取对应数据并直接生成 HTML 页面展示（不再单独返回 JSON）。
 
 ## Files & Scripts
 - `scripts/fetch_eastmoney_cgnjj.py`: Eastmoney domestic/international news + industry reports (supports date ranges)
